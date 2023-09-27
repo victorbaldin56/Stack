@@ -81,6 +81,7 @@ Stack *StackCtor(Stack *stk) {
 
     stk->data = (Elem_t *)(stk->lc + 1);
     stk->rc = (Canary_t *)(stk->data + stk->capacity);
+    stk->hash = 0;
 
     // stk->rc = stk->data + stk->capacity;
     *stk->lc = *stk->rc = CAN_VAL;
@@ -102,7 +103,7 @@ unsigned long long HashFunc(const Stack *stk) {
     STACK_ASS(stk);
 
     unsigned long long hash = 0;
-    for (size_t i = 0; i < stk->capacity * sizeof(Elem_t); i++) {
+    for (size_t i = 0; i < sizeof(Elem_t) * stk->capacity; i++) {
         hash += ((char *)stk->data)[i];
     }
 
