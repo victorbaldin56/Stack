@@ -40,18 +40,18 @@ void StackDump(const Stack *stk, StackErr errcode) {
                  stk->capacity,
                  stk->data);
 
-    fprintf(lf, "left canary = %x\n", *stk->lc);
+    fprintf(lf, "left canary = %llx\n", *stk->lc);
 
-    for (size_t i = 0; i < stk->size; i++) {
-        fprintf(lf, "*[%zu] = %llu\n", i, stk->data[i]);
+    for (ssize_t i = 0; i < stk->size; i++) {
+        fprintf(lf, "*[%zd] = %llu\n", i, stk->data[i]);
     }
 
-    for (size_t i = stk->size; i < stk->capacity; i++) {
-        fprintf(lf, "[%zu] = %llu\n", i, stk->data[i]);
+    for (ssize_t i = stk->size; i < stk->capacity; i++) {
+        fprintf(lf, "[%zd] = %llu\n", i, stk->data[i]);
     }
 
-    fprintf(lf, "right canary = %x\n", stk->rc);
-    fprintf(lf, "errcode = %d\n", errcode);
+    fprintf(lf, "right canary = %llx\n", *stk->rc);
+    fprintf(lf, "errcode = %d\n (%s)", errcode, GETVNAME(errcode));
 
     fclose(lf);
     lf = NULL;
