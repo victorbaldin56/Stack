@@ -2,34 +2,46 @@
 
 StackErr StackCheck(const Stack *stk) {
     if (!stk) {
-        return STK_PTR_NULL;
+        return NULL_PTR;
     }
 
     if (stk->capacity < stk->size) {
-        return STK_EXCEED;
+        return BIG_SIZE;
     }
 
     if (stk->size < 0) {
-        return STK_SIZE_NEGATIVE;
+        return SIZE_NEGATIVE;
     }
 
     if (stk->capacity < 0) {
-        return STK_CAPACITY_NEGATIVE;
+        return CAP_NEGATIVE;
     }
 
     if (*stk->lc != CAN_VAL) {
-        return STK_LC_DEAD; // left canary protection
+        return LC_DEAD; // left canary protection
     }
 
     if (*stk->rc != CAN_VAL) {
-        return STK_RC_DEAD; // right canary protection
+        return RC_DEAD; // right canary protection
     }
+
+    // if (stk->hash != HashFunc(stk)) {
+    //     return HASH_DEAD;
+    // }
 
     return STACK_OK;
 }
 
 void StackDump(const Stack *stk, StackErr errcode) {
     FILE *lf = fopen("/home/victor/Dev/Stack/logs/stack.log", "w");
+
+    if (!errcode) {
+        fprintf(lf, "STK is OK\n");
+    }
+
+    else {
+        fprintf(lf, "ERROR:\n");
+    }
 
     assert(lf);
     assert(stk);
@@ -84,4 +96,15 @@ void StackDtor(Stack *stk) {
     free(stk->lc);
     stk->data = NULL;
     stk = NULL;
+}
+
+unsigned long long HashFunc(const Stack *stk) {
+    STACK_ASS(stk);
+
+    unsigned long long hash = 0;
+    for (size_t i = 0; i < stk->capacity * sizeof(Elem_t); i++) {
+        hash += ((char *)stk->data)[i];
+    }
+
+    return hash;
 }

@@ -1,5 +1,4 @@
 #include "stack.h"
-#include "debug.h"
 
 int main() {
     printf("# A demo program for stack structure\n"
@@ -14,7 +13,7 @@ int main() {
         Push(&stk, value);
     }
 
-    while (Pop(&stk, &value) != STK_POP_EMPTY) {
+    while (Pop(&stk, &value) != POP_EMPTY) {
         printf("Stack: %llu\n", value);
     }
 

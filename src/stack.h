@@ -40,6 +40,7 @@ typedef struct {
     Elem_t *data;
     ssize_t size;
     ssize_t capacity;
+    unsigned long long hash;
     Canary_t *rc;
 } Stack;
 
@@ -47,15 +48,16 @@ const Canary_t CAN_VAL = 0xDEDEDEDEDEDEDEDE;
 
 enum StackErr {
     STACK_OK,
-    STK_EXCEED,
-    STK_PTR_NULL,
-    STK_SIZE_NEGATIVE,
-    STK_CAPACITY_NEGATIVE,
-    STK_LC_DEAD,
-    STK_RC_DEAD,
-    STK_REALLOC_FAILED,
-    STK_POP_EMPTY,
-    STK_POP_VAL_NULL,
+    BIG_SIZE,
+    NULL_PTR,
+    SIZE_NEGATIVE,
+    CAP_NEGATIVE,
+    LC_DEAD,
+    RC_DEAD,
+    HASH_DEAD,
+    REALLOC_FAILED,
+    POP_EMPTY,
+    POP_VAL_NULL,
 };
 
 /**
@@ -78,6 +80,8 @@ Stack *StackRealloc(Stack *stk, size_t newcap);
 StackErr Push(Stack *stk, Elem_t value);
 
 StackErr Pop(Stack *stk, Elem_t *value);
+
+unsigned long long HashFunc(const Stack *stk);
 
 // void *Recalloc(void *ptr, size_t oldsize, size_t newsize);
 
