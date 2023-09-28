@@ -25,9 +25,14 @@ StackErr StackCheck(const Stack *stk) {
         return RC_DEAD; // right canary protection
     }
 
-    // if (stk->hash != HashFunc(stk)) {
-    //     return HASH_DEAD;
-    // }
+    // printf("canary check success\n");
+
+    if (stk->hash != HashFunc(stk)) {
+        printf("hash dead\n");
+        // return HASH_DEAD;
+    }
+
+    // printf("stack check success\n");
 
     return STACK_OK;
 }
@@ -81,13 +86,16 @@ Stack *StackCtor(Stack *stk) {
 
     stk->data = (Elem_t *)(stk->lc + 1);
     stk->rc = (Canary_t *)(stk->data + stk->capacity);
-    stk->hash = 0;
 
     // stk->rc = stk->data + stk->capacity;
     *stk->lc = *stk->rc = CAN_VAL;
 
+    // printf("canaries assigned\n");
     STACK_ASS(stk); // checks if stk is not OK
+    // printf("stk assertion success\n");
+    stk->hash = 0;
 
+    // printf("Ctor returned successfully\n");
     return stk;
 }
 
@@ -100,9 +108,9 @@ void StackDtor(Stack *stk) {
 }
 
 unsigned long long HashFunc(const Stack *stk) {
-    STACK_ASS(stk);
-
+    assert(stk);
     unsigned long long hash = 0;
+
     for (size_t i = 0; i < sizeof(Elem_t) * stk->capacity; i++) {
         hash += ((char *)stk->data)[i];
     }

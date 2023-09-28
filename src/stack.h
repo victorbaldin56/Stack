@@ -17,6 +17,7 @@
 #include <limits.h>
 
 #ifndef NDEBUG
+
 #define STACK_ASS(stk)                                          \
     if (StackCheck(stk)) {                                      \
         StackDump(stk, StackCheck(stk), __FILE__, __LINE__);    \

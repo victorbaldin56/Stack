@@ -1,6 +1,7 @@
 #include "stack.h"
 
 StackErr Push(Stack *stk, Elem_t value) {
+    stk->hash = HashFunc(stk);
     STACK_ASS(stk);
 
     if (stk->size == stk->capacity) {
@@ -9,12 +10,12 @@ StackErr Push(Stack *stk, Elem_t value) {
         }
     }
 
-    stk->hash = HashFunc(stk);
     stk->data[stk->size++] = value;
     return STACK_OK;
 }
 
 StackErr Pop(Stack *stk, Elem_t *value) {
+    stk->hash = HashFunc(stk);
     STACK_ASS(stk);
 
     if (!stk->size) {
@@ -31,7 +32,6 @@ StackErr Pop(Stack *stk, Elem_t *value) {
         }
     }
 
-    stk->hash = HashFunc(stk);
     *value = stk->data[--stk->size];
     stk->data[stk->size] = ULLONG_MAX; // poisoning
     return STACK_OK;
