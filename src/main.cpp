@@ -20,10 +20,10 @@ int main() {
 
     StackDtor(&stk);
 
-    // Stack badstk = {};
-    // StackCtor(&badstk);
-    // badstk.size = -1;
-    // STACK_ASS(&badstk);
+    Stack badstk = {};
+    StackCtor(&badstk);
+    badstk.size = -1;
+    STACK_ASS(&badstk);
 
     return 0;
 }
