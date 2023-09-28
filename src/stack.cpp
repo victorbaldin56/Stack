@@ -38,7 +38,9 @@ StackErr StackCheck(const Stack *stk) {
 }
 
 void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
-    FILE *lf = fopen("./logs/stack.log", "w");
+    FILE *lf = fopen("/home/victor/Dev/Stack/logs/stack.log", "w");
+
+    assert(lf);
 
     if (!errcode) {
         fprintf(lf, "STK is OK\n");
@@ -48,7 +50,6 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
         fprintf(lf, "ERROR in file %s, line %d:\n", file, line);
     }
 
-    assert(lf);
     assert(stk);
     fprintf(lf, "size = %zd\n"
                 "capacity = %zd\n"
