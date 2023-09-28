@@ -32,7 +32,7 @@ StackErr StackCheck(const Stack *stk) {
     return STACK_OK;
 }
 
-void StackDump(const Stack *stk, StackErr errcode) {
+void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
     FILE *lf = fopen("/home/victor/Dev/Stack/logs/stack.log", "w");
 
     if (!errcode) {
@@ -40,7 +40,7 @@ void StackDump(const Stack *stk, StackErr errcode) {
     }
 
     else {
-        fprintf(lf, "ERROR:\n");
+        fprintf(lf, "ERROR in file %s, line %d:\n", file, line);
     }
 
     assert(lf);
@@ -55,11 +55,11 @@ void StackDump(const Stack *stk, StackErr errcode) {
     fprintf(lf, "left canary = %llx\n", *stk->lc);
 
     for (ssize_t i = 0; i < stk->size; i++) {
-        fprintf(lf, "*[%zd] = %llu\n", i, stk->data[i]);
+        fprintf(lf, "*[%zd] = " PRINTFFMT "\n", i, stk->data[i]);
     }
 
     for (ssize_t i = stk->size; i < stk->capacity; i++) {
-        fprintf(lf, "[%zd] = %llu\n", i, stk->data[i]);
+        fprintf(lf, "[%zd] = " PRINTFFMT "\n", i, stk->data[i]);
     }
 
     fprintf(lf, "right canary = %llx\n", *stk->rc);

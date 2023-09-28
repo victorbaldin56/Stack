@@ -17,10 +17,10 @@
 #include <limits.h>
 
 #ifndef NDEBUG
-#define STACK_ASS(stk)                      \
-    if (StackCheck(stk)) {                  \
-        StackDump(stk, StackCheck(stk));    \
-        abort();                            \
+#define STACK_ASS(stk)                                          \
+    if (StackCheck(stk)) {                                      \
+        StackDump(stk, StackCheck(stk), __FILE__, __LINE__);    \
+        abort();                                                \
     }
 
 #else
@@ -31,6 +31,8 @@
 
 typedef unsigned long long Elem_t;
 typedef unsigned long long Canary_t;
+
+#define PRINTFFMT "%llu"
 
 /**
  * @brief Holds stack
@@ -65,7 +67,7 @@ enum StackErr {
 */
 StackErr StackCheck(const Stack *stk);
 
-void StackDump(const Stack *stk, StackErr errcode);
+void StackDump(const Stack *stk, StackErr errcode, const char *file, int line);
 
 const int INIT_CAP = 1;
 
