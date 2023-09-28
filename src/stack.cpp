@@ -38,7 +38,7 @@ StackErr StackCheck(const Stack *stk) {
 }
 
 void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
-    FILE *lf = fopen("/home/victor/Dev/Stack/logs/stack.log", "w");
+    FILE *lf = fopen("./logs/stack.log", "w");
 
     if (!errcode) {
         fprintf(lf, "STK is OK\n");
