@@ -7,5 +7,9 @@ Can be used as a library without main file, or as a testing program.
 2. ```make```
 3. ```make run```
 
+Need docs? Running ```doxygen``` will generate html docs from comments in source code with configuration from
+Doxyfile if you have Doxygen
+installed.
+
 ## Support
 Created by [victorbaldin56](https://github.com/victorbaldin56).
