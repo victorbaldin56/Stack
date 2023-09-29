@@ -74,7 +74,7 @@ enum StackErr {
     #endif
     REALLOC_FAILED,
     POP_EMPTY,
-    POP_VAL_NULL,
+    // POP_VAL_NULL,
 };
 
 /**

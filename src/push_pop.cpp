@@ -26,9 +26,7 @@ StackErr Pop(Stack *stk, Elem_t *value) {
         return POP_EMPTY;
     }
 
-    if (!value) {
-        return POP_VAL_NULL;
-    }
+    my_assert(value);
 
     if (stk->size * COEFF * COEFF <= stk->capacity) {
         if (!StackRealloc(stk, stk->capacity / COEFF)) {

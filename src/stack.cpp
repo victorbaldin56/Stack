@@ -1,5 +1,21 @@
 #include "stack.h"
 
+static const char *err_messages[] = {
+    "NO ERRORS",
+    "BIG SIZE",
+    "STACK IS NULL",
+    "SIZE IS NEGATIVE",
+    "CAPACITY IS NEGATIVE",
+    "LEFT CANARY DEAD",
+    "RIGHT CANARY DEAD",
+    #ifdef HASH_PROTECT
+    "HASH DEAD",
+    #endif
+    "BUFFER REALLOC FAILED",
+    "CANNOT POP: STACK IS EMPTY",
+};
+
+
 StackErr StackCheck(const Stack *stk) {
     if (!stk) {
         return NULL_PTR;
@@ -55,7 +71,10 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
         fprintf(lf, "ERROR in file %s, line %d:\n", file, line);
     }
 
-    my_assert(stk);
+    if (!stk) {
+        fprintf(lf, "Stack pointer is NULL, file %s, line %d\n", file, line);
+    }
+
     fprintf(lf, "size = %zd\n"
                 "capacity = %zd\n"
                 "data[%p]:\n",
@@ -74,7 +93,7 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
     }
 
     fprintf(lf, "right canary = %llx\n", *stk->rc);
-    fprintf(lf, "errcode = %d\n (%s)", errcode, GETVNAME(errcode));
+    fprintf(lf, "errcode = %d\n (%s)", errcode, err_messages[errcode]);
 
     fclose(lf);
     lf = NULL;
