@@ -39,6 +39,8 @@ StackErr StackCheck(const Stack *stk) {
         return LC_DEAD; // left canary protection
     }
 
+    my_assert(stk->rc);
+
     if (*stk->rc != CAN_VAL) {
         return RC_DEAD; // right canary protection
     }
