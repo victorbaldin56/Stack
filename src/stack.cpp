@@ -17,6 +17,8 @@ StackErr StackCheck(const Stack *stk) {
         return CAP_NEGATIVE;
     }
 
+    my_assert(stk->lc);
+
     if (*stk->lc != CAN_VAL) {
         return LC_DEAD; // left canary protection
     }
