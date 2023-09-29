@@ -46,18 +46,21 @@ typedef unsigned long long Canary_t;
  * @brief Holds stack
 */
 typedef struct {
-    Canary_t *lc;
-    Elem_t *data;
-    ssize_t size;
-    ssize_t capacity;
+    Canary_t *lc; //< left protection boarder ("canary")
+    Elem_t *data; //< buffer to store stack data
+    ssize_t size; //< current position in stack
+    ssize_t capacity; //< capacity of the buffer
     #ifdef HASH_PROTECT
-    unsigned long long hash;
+    unsigned long long hash; //< hash sum
     #endif
-    Canary_t *rc;
+    Canary_t *rc; //< right "canary"
 } Stack;
 
 const Canary_t CAN_VAL = 0xDEDEDEDEDEDEDEDE;
 
+/**
+ * Enum for error codes
+*/
 enum StackErr {
     STACK_OK,
     BIG_SIZE,
@@ -75,7 +78,9 @@ enum StackErr {
 };
 
 /**
- *
+ * @brief Checks if stack damaged
+ * @param stk pointer to stack
+ * @return Error code (0 if check succeed)
 */
 StackErr StackCheck(const Stack *stk);
 
@@ -83,16 +88,39 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line);
 
 const int INIT_CAP = 1;
 
+/**
+ * @brief Needed for full correct initializing of stack
+ * @param stk pointer to newly created stack (must be preinitiazed with {}; otherwise there is no guarantee)
+ * @return pointer to completely initialized stack
+*/
 Stack *StackCtor(Stack *stk);
 
+/**
+ * @brief Destructs the stack to prevent its reusage
+*/
 void StackDtor(Stack *stk);
 
 const size_t COEFF = 2; // StackRealloc multiplies capacity to this value
 
+/**
+ * @brief Reallocates the stack buffer
+ * @param stk pointer to stack
+ * @param newcap needed capacity for new buffer
+ * @return the pointer to the same stack; in case of error NULL
+*/
 Stack *StackRealloc(Stack *stk, size_t newcap);
 
+/**
+ * @brief Pushes the value to the stack
+*/
 StackErr Push(Stack *stk, Elem_t value);
 
+/**
+ * @brief Gets the last element of the stack
+ * @param stk pointer to stack
+ * @param value pointer to write the value
+ * @return Error code; 0 if no errors
+*/
 StackErr Pop(Stack *stk, Elem_t *value);
 
 #ifdef HASH_PROTECT
