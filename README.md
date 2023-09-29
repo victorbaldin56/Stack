@@ -9,7 +9,7 @@ Can be used as a library without main file, or as a testing program.
 
 Need docs? Running ```doxygen``` will generate html docs from comments in source code with configuration from
 Doxyfile if you have Doxygen
-installed.
+installed; if not, visit its [website][https://www.doxygen.nl/download.html] and follow installation instructions.
 
 ## Support
 Created by [victorbaldin56](https://github.com/victorbaldin56).
