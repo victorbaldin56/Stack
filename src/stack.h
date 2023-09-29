@@ -31,7 +31,7 @@
 
 #define my_assert(expr) \
     if (!(expr)) {  \
-        fprintf(stderr, "%s %s:%d: My assertion failed: \"" #expr "\"\n", __FILE__, __func__, __LINE__); \
+        fprintf(stderr, "%s %s:%d: My assertion \"" #expr "\" failed\n", __FILE__, __func__, __LINE__); \
         abort(); \
 }
 
