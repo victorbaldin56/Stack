@@ -63,7 +63,6 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
     FILE *lf = fopen("logs/dump.log", "w");
 
     printf("stack dump written to ./logs/dump.log\n");
-    my_assert(lf);
 
     if (!errcode) {
         fprintf(lf, "STK is OK\n");
