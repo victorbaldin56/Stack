@@ -7,7 +7,7 @@ int main() {
     printf("Enter values to push; to stop input, press ctrl+D:\n");
     Stack stk = {};
     StackCtor(&stk);
-    StackCtor(&stk);
+    // StackCtor(&stk);
 
     Elem_t value = 0;
 
@@ -21,10 +21,10 @@ int main() {
 
     StackDtor(&stk);
 
-    Stack badstk = {};
-    StackCtor(&badstk);
-    badstk.size = -1;
-    STACK_ASS(&badstk);
+    // Stack badstk = {};
+    // StackCtor(&badstk);
+    // badstk.size = -1;
+    // STACK_ASS(&badstk);
 
     return 0;
 }
