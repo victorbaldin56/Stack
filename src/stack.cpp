@@ -78,8 +78,11 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
 
 Stack *StackCtor(Stack *stk) {
     // STACK_ASS(stk); // checks if stack is not OK
+    assert(!stk->capacity);
+    assert(stk);
     stk->capacity = INIT_CAP;
     stk->size = 0;
+
     stk->lc = (Canary_t *)calloc(2 * sizeof(Canary_t) + stk->capacity * sizeof(Elem_t), 1);
 
     if (!stk->lc) {
