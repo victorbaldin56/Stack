@@ -46,14 +46,14 @@ typedef unsigned long long Canary_t;
  * @brief Holds stack
 */
 typedef struct {
-    Canary_t *lc; //< left protection boarder ("canary")
-    Elem_t *data; //< buffer to store stack data
-    ssize_t size; //< current position in stack
-    ssize_t capacity; //< capacity of the buffer
+    Canary_t *lc;               ///< left protection boarder ("canary")
+    Elem_t *data;               ///< buffer to store stack data
+    ssize_t size;               ///< current position in stack
+    ssize_t capacity;           ///< capacity of the buffer
     #ifdef HASH_PROTECT
-    unsigned long long hash; //< hash sum
+    unsigned long long hash;    ///< hash sum
     #endif
-    Canary_t *rc; //< right "canary"
+    Canary_t *rc;               ///< right "canary"
 } Stack;
 
 const Canary_t CAN_VAL = 0xDEDEDEDEDEDEDEDE;
