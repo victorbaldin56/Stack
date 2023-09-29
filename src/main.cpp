@@ -7,7 +7,7 @@ int main() {
     printf("Enter values to push; to stop input, press ctrl+D:\n");
     Stack stk = {};
     StackCtor(&stk);
-    // StackCtor(&stk);
+    StackCtor(&stk);
 
     Elem_t value = 0;
 

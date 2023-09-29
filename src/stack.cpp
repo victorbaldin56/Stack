@@ -42,7 +42,7 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
     FILE *lf = fopen("logs/dump.log", "w");
 
     printf("stack dump written to ./logs/dump.log\n");
-    assert(lf);
+    my_assert(lf);
 
     if (!errcode) {
         fprintf(lf, "STK is OK\n");
@@ -52,7 +52,7 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
         fprintf(lf, "ERROR in file %s, line %d:\n", file, line);
     }
 
-    assert(stk);
+    my_assert(stk);
     fprintf(lf, "size = %zd\n"
                 "capacity = %zd\n"
                 "data[%p]:\n",
@@ -79,8 +79,8 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
 
 Stack *StackCtor(Stack *stk) {
     // STACK_ASS(stk); // checks if stack is not OK
-    assert(!stk->capacity);
-    assert(stk);
+    my_assert(!stk->capacity);
+    my_assert(stk);
     stk->capacity = INIT_CAP;
     stk->size = 0;
 
@@ -98,7 +98,7 @@ Stack *StackCtor(Stack *stk) {
 
     // printf("canaries assigned\n");
     STACK_ASS(stk); // checks if stk is not OK
-    // printf("stk assertion success\n");
+    // printf("stk my_assertion success\n");
     stk->hash = 0;
 
     // printf("Ctor returned successfully\n");
@@ -114,7 +114,7 @@ void StackDtor(Stack *stk) {
 }
 
 unsigned long long HashFunc(const Stack *stk) {
-    assert(stk);
+    my_assert(stk);
     unsigned long long hash = 0;
 
     for (size_t i = 0; i < sizeof(Elem_t) * stk->capacity; i++) {

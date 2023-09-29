@@ -28,6 +28,12 @@
 #define STACK_ASS(stk) ;
 #endif
 
+#define my_assert(expr) \
+    if (!(expr)) {  \
+        fprintf(stderr, "%s %s:%d: My assertion failed: \"" #expr "\"\n", __FILE__, __func__, __LINE__); \
+        abort(); \
+}
+
 #define GETVNAME(var) (#var)
 
 typedef unsigned long long Elem_t;
