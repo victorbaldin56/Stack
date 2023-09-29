@@ -8,6 +8,7 @@ int main() {
     Stack stk = {};
     StackCtor(&stk);
     // StackCtor(&stk);
+    StackCtor(NULL);
 
     Elem_t value = 0;
 

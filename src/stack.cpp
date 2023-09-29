@@ -101,8 +101,8 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
 
 Stack *StackCtor(Stack *stk) {
     // STACK_ASS(stk); // checks if stack is not OK
-    my_assert(!stk->capacity);
     my_assert(stk);
+    my_assert(!stk->capacity);
     stk->capacity = INIT_CAP;
     stk->size = 0;
 
