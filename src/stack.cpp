@@ -38,6 +38,7 @@ StackErr StackCheck(const Stack *stk) {
 }
 
 void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
+    system("mkdir logs\n");
     FILE *lf = fopen("logs/dump.log", "w");
 
     printf("stack dump written to ./logs/dump.log\n");
