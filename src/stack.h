@@ -1,6 +1,7 @@
 #ifndef STACK
 #define STACK
 
+// #define HASH_PROTECT
 // #define NDEBUG
 
 #ifndef NDEBUG
@@ -49,7 +50,9 @@ typedef struct {
     Elem_t *data;
     ssize_t size;
     ssize_t capacity;
+    #ifdef HASH_PROTECT
     unsigned long long hash;
+    #endif
     Canary_t *rc;
 } Stack;
 
@@ -63,7 +66,9 @@ enum StackErr {
     CAP_NEGATIVE,
     LC_DEAD,
     RC_DEAD,
+    #ifdef HASH_PROTECT
     HASH_DEAD,
+    #endif
     REALLOC_FAILED,
     POP_EMPTY,
     POP_VAL_NULL,
@@ -90,7 +95,9 @@ StackErr Push(Stack *stk, Elem_t value);
 
 StackErr Pop(Stack *stk, Elem_t *value);
 
+#ifdef HASH_PROTECT
 unsigned long long HashFunc(const Stack *stk);
+#endif
 
 // void *Recalloc(void *ptr, size_t oldsize, size_t newsize);
 

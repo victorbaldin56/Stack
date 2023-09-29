@@ -1,7 +1,9 @@
 #include "stack.h"
 
 StackErr Push(Stack *stk, Elem_t value) {
+    #ifdef HASH_PROTECT
     stk->hash = HashFunc(stk);
+    #endif
     STACK_ASS(stk);
 
     if (stk->size == stk->capacity) {
@@ -15,7 +17,9 @@ StackErr Push(Stack *stk, Elem_t value) {
 }
 
 StackErr Pop(Stack *stk, Elem_t *value) {
+    #ifdef HASH_PROTECT
     stk->hash = HashFunc(stk);
+    #endif
     STACK_ASS(stk);
 
     if (!stk->size) {

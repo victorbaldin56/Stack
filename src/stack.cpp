@@ -26,11 +26,12 @@ StackErr StackCheck(const Stack *stk) {
     }
 
     // printf("canary check success\n");
-
+    #ifdef HASH_PROTECT
     if (stk->hash != HashFunc(stk)) {
         printf("hash dead\n");
         // return HASH_DEAD;
     }
+    #endif
 
     // printf("stack check success\n");
 
@@ -99,7 +100,9 @@ Stack *StackCtor(Stack *stk) {
     // printf("canaries assigned\n");
     STACK_ASS(stk); // checks if stk is not OK
     // printf("stk my_assertion success\n");
+    #ifdef HASH_PROTECT
     stk->hash = 0;
+    #endif
 
     // printf("Ctor returned successfully\n");
     return stk;
@@ -113,6 +116,7 @@ void StackDtor(Stack *stk) {
     stk = NULL;
 }
 
+#ifdef HASH_PROTECT
 unsigned long long HashFunc(const Stack *stk) {
     my_assert(stk);
     unsigned long long hash = 0;
@@ -123,3 +127,4 @@ unsigned long long HashFunc(const Stack *stk) {
 
     return hash;
 }
+#endif
