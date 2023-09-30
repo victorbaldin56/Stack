@@ -65,9 +65,16 @@ StackErr StackCheck(const Stack *stk) {
 
 void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
     system("mkdir logs\n");
-    FILE *lf = fopen("logs/dump.log", "w");
+    // char *dir = "logs/";
+    time_t date = time(NULL);
 
-    printf("stack dump written to ./logs/dump.log\n");
+    char filename[MAXLEN] = {};
+
+    snprintf(filename, MAXLEN, "logs/%s.log", asctime(gmtime(&date)));
+
+    FILE *lf = fopen(filename, "w");
+
+    printf("stack dump written to %s\n", filename);
 
     if (!errcode) {
         fprintf(lf, "STK is OK\n");
@@ -89,6 +96,11 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
                  stk->data);
 
     fprintf(lf, "left canary = %llx\n", *stk->lc);
+
+    if (!stk->data) {
+        fprintf(lf, "data is NULL\n");
+        return;
+    }
 
     for (ssize_t i = 0; i < stk->size; i++) {
         fprintf(lf, "*[%zd] = " PRINTFFMT "\n", i, stk->data[i]);

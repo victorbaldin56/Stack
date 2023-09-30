@@ -11,6 +11,7 @@ int main() {
     // StackCtor(NULL);
 
     Elem_t value = 0;
+    // stk.data = NULL;
 
     while (scanf(PRINTFFMT, &value) > 0) {
         Push(&stk, value);
@@ -22,10 +23,10 @@ int main() {
 
     StackDtor(&stk);
 
-//     Stack badstk = {};
-//     StackCtor(&badstk);
-//     badstk.size = -1;
-//     STACK_ASS(&badstk);
-//
+    // Stack badstk = {};
+    // StackCtor(&badstk);
+    // badstk.size = -1;
+    // STACK_ASS(&badstk);
+
     return 0;
 }
