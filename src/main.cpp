@@ -17,6 +17,8 @@ int main() {
         Push(&stk, value);
     }
 
+    StackDump(&stk, STACK_OK, __FILE__, __LINE__);
+
     while (Pop(&stk, &value) != POP_EMPTY) {
         printf("Pop: " PRINTFFMT "\n", value);
     }

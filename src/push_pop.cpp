@@ -13,6 +13,8 @@ StackErr Push(Stack *stk, Elem_t value) {
     }
 
     stk->data[stk->size++] = value;
+
+    STACK_ASS(stk);
     return STACK_OK;
 }
 
@@ -36,5 +38,7 @@ StackErr Pop(Stack *stk, Elem_t *value) {
 
     *value = stk->data[--stk->size];
     stk->data[stk->size] = ULLONG_MAX; // poisoning
+
+    STACK_ASS(stk);
     return STACK_OK;
 }
