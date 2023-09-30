@@ -65,6 +65,7 @@ enum StackErr {
     STACK_OK,
     BIG_SIZE,
     NULL_PTR,
+    BUFF_NULL,
     SIZE_NEGATIVE,
     CAP_NEGATIVE,
     LC_DEAD,

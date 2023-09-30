@@ -4,6 +4,7 @@ static const char *err_messages[] = {
     "NO ERRORS",
     "BIG SIZE",
     "STACK IS NULL",
+    "BUFFER PTR IS NULL",
     "SIZE IS NEGATIVE",
     "CAPACITY IS NEGATIVE",
     "LEFT CANARY DEAD",
@@ -19,6 +20,10 @@ static const char *err_messages[] = {
 StackErr StackCheck(const Stack *stk) {
     if (!stk) {
         return NULL_PTR;
+    }
+
+    if (!stk->data) {
+        return BUFF_NULL;
     }
 
     if (stk->capacity < stk->size) {
