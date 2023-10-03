@@ -87,7 +87,7 @@ enum StackErr {
 */
 StackErr StackCheck(const Stack *stk);
 
-const size_t MAXLEN = 1000; // max len for string functions
+const size_t MAXLEN = 255; // max len for string functions
 
 void StackDump(const Stack *stk, StackErr errcode, const char *file, int line);
 

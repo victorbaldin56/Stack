@@ -70,7 +70,9 @@ void StackDump(const Stack *stk, StackErr errcode, const char *file, int line) {
 
     char filename[MAXLEN] = {};
 
-    snprintf(filename, MAXLEN, "logs/%s.log", asctime(gmtime(&date)));
+    strftime(filename, sizeof(filename), "logs/%Y-%m-%d_%H:%M:%S.log", gmtime(&date));
+
+    // snprintf(filename, MAXLEN, "logs/%s.log", asctime(gmtime(&date)));
 
     FILE *lf = fopen(filename, "w");
 
