@@ -37,7 +37,7 @@ StackErr Pop(Stack *stk, Elem_t *value) {
     }
 
     *value = stk->data[--stk->size];
-    stk->data[stk->size] = ULLONG_MAX; // poisoning
+    stk->data[stk->size] = NAN; // poisoning
 
     STACK_ASS(stk);
     return STACK_OK;

@@ -17,6 +17,7 @@
 #include <string.h>
 #include <limits.h>
 #include <time.h>
+#include <math.h>
 
 #ifndef NDEBUG
 
@@ -38,10 +39,10 @@
 
 #define GETVNAME(var) (#var)
 
-typedef unsigned long long Elem_t;
+typedef double Elem_t;
 typedef unsigned long long Canary_t;
 
-#define PRINTFFMT "%llu"
+#define PRINTFFMT "%lf"
 
 /**
  * @brief Holds stack

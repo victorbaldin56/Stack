@@ -13,6 +13,10 @@ int main() {
     Elem_t value = 0;
     // stk.data = NULL;
 
+    // for (Elem_t el = 0; el < 100000; el++) {
+    //     Push(&stk, el);
+    // }
+
     while (scanf(PRINTFFMT, &value) > 0) {
         Push(&stk, value);
     }
